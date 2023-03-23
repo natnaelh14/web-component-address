@@ -28,7 +28,7 @@ export class MyCard {
         <div class="flex flex-col items-center justify-center w-[600px] shadow-2xl m-10 p-4">
           <img src="https://res.cloudinary.com/doalzf6o2/image/upload/v1678421121/logo_hozn4t.png" height={100} width={100} />
           <p class="text-center text-3xl p-6">
-            America&apos;s #30 <span class="font-extrabold">Meal Delivery Service</span>
+            America&apos;s #50 <span class="font-extrabold">Meal Delivery Service</span>
           </p>
           <div class="p-6">
             <label htmlFor="street-address" class="block text-sm font-medium leading-6 text-gray-900">
