@@ -33,7 +33,6 @@ export class MyCard {
   @Event() addressSelectionEvent: EventEmitter;
 
   handleClick = () => {
-    console.log('handleClick');
     this.addressSelectionEvent.emit({ isAvailable: this.isAvailable });
   };
 
@@ -51,8 +50,8 @@ export class MyCard {
         const { place_id, formatted_address } = suggestion;
 
         return (
-          <li class="pl-5 pr-2 py-3 bg-gray-50 hover:bg-gray-200 hover:cursor-pointer" tabIndex={0} key={place_id} onClick={handleSelect}>
-            <span class="font-medium" onClick={this.handleClick}>
+          <li class="pl-5 pr-2 py-3 bg-gray-50 hover:bg-gray-200 hover:cursor-pointer" tabIndex={0} key={place_id} onClick={this.handleClick}>
+            <span class="font-medium">
               {formatted_address}
             </span>
           </li>
