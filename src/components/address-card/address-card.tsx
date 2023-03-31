@@ -35,15 +35,15 @@ export class MyCard {
   handleClick = () => {
     this.addressSelectionEvent.emit({ isAvailable: this.isAvailable });
   };
-
-  render() {
-    const addressChange = e => {
+    
+ addressChange = e => {
       if (e.currentTarget.value === 'available') {
         this.isAvailable = true;
       } else {
         this.isAvailable = false;
       }
     };
+  render() {
     const handleSelect = () => {};
     const renderSuggestions = () =>
       mockSuggestions.map(suggestion => {
@@ -80,13 +80,13 @@ export class MyCard {
             </div>
             <div class="flex justify-center gap-6 mt-4">
               <div class="mb-[0.125rem] block min-h-[1.5rem] pl-[1.5rem]">
-                <input checked={this.isAvailable} type="radio" name="available" value="available" id="radioDefault01" onChange={addressChange} />
+                <input checked={this.isAvailable} type="radio" name="available" value="available" id="radioDefault01" onChange={this.addressChange} />
                 <label class="mt-px inline-block pl-[0.15rem] hover:cursor-pointer" htmlFor="radioDefault01">
                   Available
                 </label>
               </div>
               <div class="mb-[0.125rem] block min-h-[1.5rem] pl-[1.5rem]">
-                <input checked={!this.isAvailable} type="radio" name="unavailable" value="unavailable" id="radioDefault02" onChange={addressChange} />
+                <input checked={!this.isAvailable} type="radio" name="unavailable" value="unavailable" id="radioDefault02" onChange={this.addressChange} />
                 <label class="mt-px inline-block pl-[0.15rem] hover:cursor-pointer" htmlFor="radioDefault02">
                   Unavailable
                 </label>
