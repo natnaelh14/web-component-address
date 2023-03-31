@@ -26,7 +26,7 @@ const mockSuggestions = [
 @Component({
   tag: 'address-card',
   styleUrl: 'address-card.css',
-  shadow: false,
+  shadow: true,
 })
 export class MyCard {
   @State() isAvailable: boolean = true;
