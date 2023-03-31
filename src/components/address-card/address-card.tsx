@@ -1,5 +1,28 @@
 import { Component, h, State, Event, EventEmitter } from '@stencil/core';
 
+const mockSuggestions = [
+  {
+    place_id: 1,
+    formatted_address: '9463 North Fifth Street Brighton, MA 02135',
+  },
+  {
+    place_id: 2,
+    formatted_address: '41 Sherwood Street Dearborn Heights, MI 48127',
+  },
+  {
+    place_id: 3,
+    formatted_address: '930 Pine Avenue Sandusky, OH 44870',
+  },
+  {
+    place_id: 4,
+    formatted_address: '8089 Water St. Norfolk, VA 23503',
+  },
+  {
+    place_id: 5,
+    formatted_address: '161 Sycamore Ave. Pelham, AL 35124',
+  },
+];
+
 @Component({
   tag: 'address-card',
   styleUrl: 'address-card.css',
@@ -7,11 +30,11 @@ import { Component, h, State, Event, EventEmitter } from '@stencil/core';
 })
 export class MyCard {
   @State() isAvailable: boolean = true;
-  @Event() myCustomEvent: EventEmitter;
+  @Event() addressSelectionEvent: EventEmitter;
 
   handleClick = () => {
     console.log('handleClick');
-    this.myCustomEvent.emit({ isAvailable: this.isAvailable });
+    this.addressSelectionEvent.emit({ isAvailable: this.isAvailable });
   };
 
   render() {
@@ -22,29 +45,39 @@ export class MyCard {
         this.isAvailable = false;
       }
     };
+    const handleSelect = () => {};
+    const renderSuggestions = () =>
+      mockSuggestions.map(suggestion => {
+        const { place_id, formatted_address } = suggestion;
+
+        return (
+          <li class="pl-5 pr-2 py-3 bg-gray-50 hover:bg-gray-200 hover:cursor-pointer" tabIndex={0} key={place_id} onClick={handleSelect}>
+            <span class="font-medium" onClick={this.handleClick}>
+              {formatted_address}
+            </span>
+          </li>
+        );
+      });
 
     return (
       <main class="flex justify-center">
         <div class="flex flex-col items-center justify-center w-[600px] shadow-2xl m-10 p-4">
-          <img src="https://res.cloudinary.com/doalzf6o2/image/upload/v1678421121/logo_hozn4t.png" height={100} width={100} />
           <p class="text-center text-3xl p-6">
-            America&apos;s #50 <span class="font-extrabold">Meal Delivery Service</span>
+            America&apos;s #1 Laundry and Cleaning <span class="font-extrabold">Pick up and Delivery</span>
           </p>
           <div class="p-6">
             <label htmlFor="street-address" class="block text-sm font-medium leading-6 text-gray-900">
-              Check if delivery service is available at your location
+              Check if Home Delivery is available at your location
             </label>
-            <div class="flex flex-row gap-4 items-center">
+            <div class="flex flex-col items-center">
               <input
                 type="text"
                 name="street-address"
                 id="street-address"
                 autocomplete="street-address"
-                class="w-[400px] mt-2 block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                class="w-full mt-2 block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
-              <button onClick={this.handleClick} class="px-8 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 rounded-full">
-                Search
-              </button>
+              <ul>{renderSuggestions()}</ul>
             </div>
             <div class="flex justify-center gap-6 mt-4">
               <div class="mb-[0.125rem] block min-h-[1.5rem] pl-[1.5rem]">
